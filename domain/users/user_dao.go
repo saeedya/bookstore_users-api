@@ -1,14 +1,21 @@
 package users
 
 import (
+	"bookstore_users-api/datasources/mysql/users_db"
 	"bookstore_users-api/utils/date"
 	"bookstore_users-api/utils/errors"
 	"fmt"
+	"log"
 )
 
 var userDB = make(map[int64]*User)
 
 func (user *User) Get() *errors.RestError {
+
+	if err := users_db.Client.Ping(); err != nil {
+		log.Fatal(err)
+	}
+
 	result := userDB[user.Id]
 	if result == nil {
 		return errors.NewNotFoundError(fmt.Sprintf("user %d not found", user.Id))
