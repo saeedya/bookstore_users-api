@@ -1,0 +1,20 @@
+meta {
+  name: Create_users_valid
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": 123,
+    "first_name": "saeed",
+    "last_name": "yasrebi",
+    "email": "saeed@yahoo.com"
+  }
+}
